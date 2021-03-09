@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { actAddProductRequest, actUpdateProductRequest, actGetProductRequest } from '../../actions/index';
 import callApi from './../../utils/apiCaller';
+
 class ProductActionPage extends Component {
 
     constructor(props) {
@@ -44,8 +45,8 @@ class ProductActionPage extends Component {
         var value = target.type === 'checkbox' ? target.checked : target.value;
         this.setState({
             [name]: value
-        });
-        
+        });   
+        console.log("nfsdfm");
     }
 
     onSubmit = (e) => {

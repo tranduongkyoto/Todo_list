@@ -5,6 +5,7 @@ import ProductList from './../../components/ProductList/ProductList';
 import ProductItem from './../../components/ProductItem/ProductItem';
 import { Link } from 'react-router-dom';
 import {actFetchProductsRequest, actDeleteProductRequest} from './../../actions/index';
+
 class ProductListPage extends Component {
    
     componentDidMount() {
