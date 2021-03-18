@@ -1,22 +1,20 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import routes from './routes';
 import Menu from './components/Menu/Menu';
 
-class App extends Component {
-    render() {
-        return (
-            <Router>
-                <div className="App">
-                    <Menu />
-                    {this.showContentMenus(routes)}
-                </div>
-            </Router>
-        );
-    }
+function App(props) {
+    return (
+        <Router>
+            <div className="App">
+                <Menu />
+                {showContentMenus(routes)}
+            </div>
+        </Router>
+    );
 
-    showContentMenus = (routes) => {
+    function showContentMenus(routes) {
         var result = null;
         if (routes.length > 0) {
             result = routes.map((route, index) => {

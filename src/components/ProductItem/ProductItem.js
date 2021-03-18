@@ -1,40 +1,48 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-class ProductItem extends Component {
+import PropTypes from 'prop-types';
+ProductItem.propTypes = {
+    product: PropTypes.object,
+    index: PropTypes.number,
+};
+ProductItem.defaultProps = {
 
-    onDelete = (id) => {
+}
+function ProductItem(props) {
+
+    function onDelete(id) {
         if (confirm('Bạn chắc chắn muốn xóa ?')) { //eslint-disable-line
-            this.props.onDelete(id);
+            props.onDelete(id);
         }
     }
 
-    render() {
-        var { product, index } = this.props;
-        var statusName = product.status ? 'Còn Hàng' : 'Hết Hàng';
-        var statusClass = product.status ? 'success' : 'default';
-        return (
-            <tr>
-                <td>{index + 1}</td>
-                <td>{product.id}</td>
-                <td>{product.name}</td>
-                <td>{product.description}</td>
-                <td>{product.price}</td>
-                <td>
-                    <span className={`label label-${statusClass}`}>
-                        {statusName}
-                    </span>
-                </td>
-                <td>
-                    <Link to={`/product/${product.id}/edit`} className="btn btn-info mr-5">
-                        <i className="glyphicon glyphicon-edit"></i> Sửa
+
+    var { product, index } = props;
+    var statusName = product.status ? 'Còn Hàng' : 'Hết Hàng';
+    var statusClass = product.status ? 'success' : 'default';
+    return (
+        <tr>
+            <td>{index + 1}</td>
+            <td>{product.id}</td>
+            <td>{product.name}</td>
+            <td>{product.description}</td>
+            <td>{product.price}</td>
+            <td>
+                <span className={`label label-${statusClass}`}>
+                    {statusName}
+                </span>
+            </td>
+            <td>
+                <Link to={`/product/${product.id}/edit`} className="btn btn-info mr-5">
+                    <i className="glyphicon glyphicon-edit"></i> Sửa
                     </Link>
-                    <button type="button" className="btn btn-danger" onClick={() => this.onDelete(product.id)}>
-                        <i className="glyphicon glyphicon-trash"></i> Xóa
+                <button type="button" className="btn btn-danger" onClick={() => onDelete(product.id)}>
+                    <i className="glyphicon glyphicon-trash"></i> Xóa
                     </button>
-                </td>
-            </tr>
-        );
-    }
+            </td>
+        </tr>
+    );
+
 }
 
 
