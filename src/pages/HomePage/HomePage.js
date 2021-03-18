@@ -1,5 +1,5 @@
 import React from 'react';
-function HomePage() {
+const HomePage = () => {
     return (
         <h1>
             Trang Chủ

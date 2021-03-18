@@ -3,17 +3,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import routes from './routes';
 import Menu from './components/Menu/Menu';
 
-function App(props) {
-    return (
-        <Router>
-            <div className="App">
-                <Menu />
-                {showContentMenus(routes)}
-            </div>
-        </Router>
-    );
-
-    function showContentMenus(routes) {
+const App = (props) => {
+    const showContentMenus = (routes) => {
         var result = null;
         if (routes.length > 0) {
             result = routes.map((route, index) => {
@@ -29,7 +20,14 @@ function App(props) {
         }
         return <Switch>{result}</Switch>;
     }
-
+    return (
+        <Router>
+            <div className="App">
+                <Menu />
+                {showContentMenus(routes)}
+            </div>
+        </Router>
+    );
 }
 
 export default App;

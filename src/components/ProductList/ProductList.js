@@ -1,6 +1,6 @@
 import React from 'react';
 
-function ProductList(props) {
+const ProductList = (props) => {
     return (
         <div className="panel panel-success">
             <div className="panel-heading">

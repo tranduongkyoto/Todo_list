@@ -1,6 +1,6 @@
 import React from 'react';
 
-function NotFound() {
+const NotFound = () => {
     return (
         <h1>Không Tìm Thấy Trang</h1>
     );

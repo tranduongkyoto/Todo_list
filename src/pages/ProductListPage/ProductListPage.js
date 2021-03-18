@@ -13,7 +13,7 @@ ProductListPage.propTypes = {
 ProductListPage.defaultProps = {
 
 }
-function ProductListPage(props) {
+const ProductListPage = (props) => {
     var { products } = useSelector(state => state);
     const dispatch = useDispatch();
 
@@ -21,10 +21,10 @@ function ProductListPage(props) {
         dispatch(actFetchProductsRequest());
     }, []);
 
-    function onDelete(id) {
+    const onDelete = (id) => {
         dispatch(actDeleteProductRequest(id));
     }
-    function showProducts(products) {
+    const showProducts = (products) => {
         var result = null;
         if (products.length > 0) {
             result = products.map((product, index) => {
@@ -40,7 +40,6 @@ function ProductListPage(props) {
         }
         return result;
     }
-
     return (
         <div className="container">
             <div className="row">
@@ -55,9 +54,6 @@ function ProductListPage(props) {
             </div>
         </div>
     );
-
-
-
 }
 
 

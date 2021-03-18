@@ -14,7 +14,7 @@ const menus = [
     }
 ]
 
-function MenuLink({ label, to, activeOnlyWhenExact }) {
+const MenuLink = ({ label, to, activeOnlyWhenExact }) => {
     return (
         <Route path={to} exact={activeOnlyWhenExact} children={({ match }) => {
             var active = match ? 'active' : '';
@@ -29,18 +29,8 @@ function MenuLink({ label, to, activeOnlyWhenExact }) {
     )
 }
 
-function Menu() {
-
-    return (
-        <nav className="navbar navbar-default">
-            <ul className="nav navbar-nav">
-                {showMenus(menus)}
-            </ul>
-        </nav>
-    );
-
-
-    function showMenus(menus) {
+const Menu = () => {
+    const showMenus = (menus) => {
         var result = null;
         if (menus.length > 0) {
             result = menus.map((menu, index) => {
@@ -56,6 +46,16 @@ function Menu() {
         }
         return result;
     }
+    return (
+        <nav className="navbar navbar-default">
+            <ul className="nav navbar-nav">
+                {showMenus(menus)}
+            </ul>
+        </nav>
+    );
+
+
+
 
 }
 

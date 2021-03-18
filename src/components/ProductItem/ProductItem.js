@@ -8,9 +8,9 @@ ProductItem.propTypes = {
 ProductItem.defaultProps = {
 
 }
-function ProductItem(props) {
+const ProductItem = (props) => {
 
-    function onDelete(id) {
+    const onDelete = (id) => {
         if (confirm('Bạn chắc chắn muốn xóa ?')) { //eslint-disable-line
             props.onDelete(id);
         }
