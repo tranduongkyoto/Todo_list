@@ -6,13 +6,7 @@ import ProductItem from './../../components/ProductItem/ProductItem';
 import { Link } from 'react-router-dom';
 import { actFetchProductsRequest, actDeleteProductRequest } from './../../actions/index';
 import PropTypes from 'prop-types';
-ProductListPage.propTypes = {
-    products: PropTypes.object,
 
-};
-ProductListPage.defaultProps = {
-
-}
 const ProductListPage = (props) => {
     var { products } = useSelector(state => state);
     const dispatch = useDispatch();
@@ -55,7 +49,10 @@ const ProductListPage = (props) => {
         </div>
     );
 }
+ProductListPage.propTypes = {
+    products: PropTypes.object,
 
+};
 
 
 

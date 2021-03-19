@@ -1,10 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-ProductItem.propTypes = {
-    product: PropTypes.object,
-    index: PropTypes.number,
-};
+
 
 const ProductItem = (props) => {
 
@@ -42,6 +39,9 @@ const ProductItem = (props) => {
     );
 
 }
-
+ProductItem.propTypes = {
+    product: PropTypes.object,
+    index: PropTypes.number,
+};
 
 export default ProductItem;
