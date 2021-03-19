@@ -1,100 +1,106 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { actAddProductRequest, actUpdateProductRequest, actGetProductRequest } from '../../actions/index';
-import callApi from './../../utils/apiCaller';
-class ProductActionPage extends Component {
+import { Formik, Field, ErrorMessage, Form } from 'formik';
+import * as Yup from 'yup';
+import { actAddProductRequest, actGetProductRequest, actUpdateProductRequest } from '../../actions';
+const ProductActionPage = (props) => {
+    var { itemEditing } = useSelector(state => state);
+    const dispatch = useDispatch();
+    const [input, setInput] = useState({
+        id: "",
+        txtName: "",
+        txtDescription: "",
+        txtPrice: "",
+        chkbStatus: false
+    });
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            id: '',
-            txtName: '',
-            txtDescription: '',
-            txtPrice: '',
-            chkbStatus: false
-        };
-    }
-
-    componentDidMount() {
-        var { match } = this.props;
-        console.log(match);
+    useEffect(() => {
+        var { match } = props;
+        //console.log(match);
         if (match) { // update
             var id = match.params.id;
-            this.props.onEditProduct(id);
-        } // else => add
-    }
-
-    componentWillReceiveProps(nextProps) {
-        console.log(nextProps);
-        if(nextProps && nextProps.itemEditing){
-            var {itemEditing} = nextProps;
-            this.setState({// đổ dữ liệu ra ngoài để sửa
-                id : itemEditing.id,
-                txtName : itemEditing.name,
-                txtDescription : itemEditing.description,
-                txtPrice : itemEditing.price,
-                chkbStatus : itemEditing.status
-            })
+            dispatch(actGetProductRequest(id));
         }
-    }
-    onChange = (e) => {
-        var target = e.target;
-        var name = target.name;
-        var value = target.type === 'checkbox' ? target.checked : target.value;
-        this.setState({
-            [name]: value
-        });
-        
-    }
+    }, []);
 
-    onSubmit = (e) => {
-        e.preventDefault();  
-        var { id, txtName, txtDescription, txtPrice, chkbStatus } = this.state;
-        var {history} = this.props;
-        var product = {
-            id: id,
-            name: txtName,
-            description: txtDescription,
-            price: txtPrice,
-            status: chkbStatus
+    useEffect(() => {
+        if (props.match && itemEditing) {
+            setInput({// đổ dữ liệu ra ngoài để sửa
+                id: itemEditing.id,
+                txtName: itemEditing.name,
+                txtDescription: itemEditing.description,
+                txtPrice: itemEditing.price,
+                chkbStatus: itemEditing.status
+            });
+        }
+        return () => {
         };
-        if(id){// update
-            this.props.onUpdateProduct(product);
-        } else {//add
-            this.props.onAddProduct(product);
-            
-        }
-        history.goBack(); 
-    }
+    }, [itemEditing]);
 
-    render() {
-        var { txtName, txtDescription, txtPrice, chkbStatus } = this.state;
-        return (
-            <div className="container">
-                <div className="row">
-                    <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                        <form onSubmit={this.onSubmit}>
+    return (
+        <Formik
+            initialValues={input}
+            enableReinitialize
+            validationSchema={Yup.object({
+                txtName: Yup.string()
+                    .required('Required'),
+                txtDescription: Yup.string(),
+                txtPrice: Yup.number().required('Required'),
+            })}
+            onSubmit={(values) => {
+                var { id, txtName, txtDescription, txtPrice, chkbStatus } = values;
+                setInput({
+                    id: id,
+                    txtName: txtName,
+                    txtDescription: txtDescription,
+                    txtPrice: txtPrice,
+                    chkbStatus: chkbStatus
+                })
+                var { history } = props;
+                var product = {
+                    id: id,
+                    name: txtName,
+                    description: txtDescription,
+                    price: txtPrice,
+                    status: chkbStatus
+                };
+                if (id) {// update
+                    console.log(input);
+                    dispatch(actUpdateProductRequest(product));
+                } else {//add
+                    dispatch(actAddProductRequest(product));
+                }
+                history.goBack();
+            }}
+        >
+            <Form >
+                <div className="container">
+                    <div className="row">
+                        <div className="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                             <legend>* Vui lòng nhập đầy đủ thông tin</legend>
                             <div className="form-group">
-                                <label>Tên Sản Phẩm: </label>
-                                <input onChange={this.onChange} value={txtName} name="txtName" type="text" className="form-control" />
+                                <label htmlFor="txtName">Tên sản phẩm</label>
+                                <Field name="txtName" type="text" className="form-control" />
+                                <ErrorMessage name="txtName" />
                             </div>
                             <div className="form-group">
-                                <label>Mô Tả Sản Phẩm: </label>
-                                <textarea onChange={this.onChange} value={txtDescription} name="txtDescription" className="form-control" rows="3">
-                                </textarea>
+                                <label htmlFor="txtDescription">Mô Tả Sản Phẩm:</label>
+                                <Field name="txtDescription" type="text" className="form-control" />
+                                <ErrorMessage name="txtDescription" />
                             </div>
                             <div className="form-group">
-                                <label>Giá: </label>
-                                <input onChange={this.onChange} value={txtPrice} name="txtPrice" type="number" className="form-control" />
+                                <label htmlFor="txtPrice">Giá:</label>
+                                <Field name="txtPrice" type="number" className="form-control" />
+                                <ErrorMessage name="txtPrice" />
                             </div>
                             <div className="form-group">
-                                <label>Tình Trạng: </label>
+                                <label htmlFor="chkbStatus">Tình Trạng: </label>
                             </div>
                             <div className="checkbox">
                                 <label>
-                                    <input checked={chkbStatus} onChange={this.onChange} value={chkbStatus} type="checkbox" name="chkbStatus" />
+                                    <Field name="chkbStatus" type="checkbox" />
+                                    <ErrorMessage name="chkbStatus" />
                                     Còn Hàng
                                 </label>
                             </div>
@@ -104,32 +110,15 @@ class ProductActionPage extends Component {
                             <button type="submit" className="btn btn-primary">
                                 <i className="glyphicon glyphicon-save"></i> Lưu Lại
                             </button>
-                        </form>
+                        </div>
                     </div>
-                </div>  
-            </div>
-        );
-    }
+                </div>
+            </Form>
+        </Formik>
+
+    );
 }
 
-const mapStateToProps = state => {
-    return {
-        itemEditing : state.itemEditing
-    }
-}
 
-const mapDispatchToProps = (dispatch, props) => {
-    return {
-        onAddProduct: (product) => {
-            dispatch(actAddProductRequest(product));
-        },
-        onUpdateProduct: (product) => {
-            dispatch(actUpdateProductRequest(product));
-        },
-        onEditProduct : (id) => {
-            dispatch(actGetProductRequest(id));
-        }
-    }
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProductActionPage);
+export default ProductActionPage;

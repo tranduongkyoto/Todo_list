@@ -1,22 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-
 import routes from './routes';
 import Menu from './components/Menu/Menu';
 
-class App extends Component {
-    render() {
-        return (
-            <Router>
-                <div className="App">
-                    <Menu />
-                    {this.showContentMenus(routes)}
-                </div>
-            </Router>
-        );
-    }
-
-    showContentMenus = (routes) => {
+const App = (props) => {
+    const showContentMenus = (routes) => {
         var result = null;
         if (routes.length > 0) {
             result = routes.map((route, index) => {
@@ -32,7 +20,14 @@ class App extends Component {
         }
         return <Switch>{result}</Switch>;
     }
-
+    return (
+        <Router>
+            <div className="App">
+                <Menu />
+                {showContentMenus(routes)}
+            </div>
+        </Router>
+    );
 }
 
 export default App;

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link, Route } from 'react-router-dom';
 
 const menus = [
@@ -8,9 +8,9 @@ const menus = [
         exact: true
     },
     {
-        name : 'Quản Lý Sản Phẩm',
-        to : '/product-list',
-        exact : false
+        name: 'Quản Lý Sản Phẩm',
+        to: '/product-list',
+        exact: false
     }
 ]
 
@@ -29,19 +29,8 @@ const MenuLink = ({ label, to, activeOnlyWhenExact }) => {
     )
 }
 
-class Menu extends Component {
-
-    render() {
-        return (
-            <nav className="navbar navbar-default">
-                <ul className="nav navbar-nav">
-                    {this.showMenus(menus)}
-                </ul>
-            </nav>
-        );
-    }
-
-    showMenus = (menus) => {
+const Menu = () => {
+    const showMenus = (menus) => {
         var result = null;
         if (menus.length > 0) {
             result = menus.map((menu, index) => {
@@ -57,6 +46,16 @@ class Menu extends Component {
         }
         return result;
     }
+    return (
+        <nav className="navbar navbar-default">
+            <ul className="nav navbar-nav">
+                {showMenus(menus)}
+            </ul>
+        </nav>
+    );
+
+
+
 
 }
 

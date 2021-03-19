@@ -1,7 +1,6 @@
 import * as Types from './../constants/ActionType';
 
-var initialState = [
-];
+var initialState = [];
 
 const products = (state = initialState, action) => {
     var { product, id } = action;
