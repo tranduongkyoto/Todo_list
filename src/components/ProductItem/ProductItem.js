@@ -5,9 +5,7 @@ ProductItem.propTypes = {
     product: PropTypes.object,
     index: PropTypes.number,
 };
-ProductItem.defaultProps = {
 
-}
 const ProductItem = (props) => {
 
     const onDelete = (id) => {
