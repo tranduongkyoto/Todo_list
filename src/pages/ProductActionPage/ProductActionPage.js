@@ -66,7 +66,6 @@ const ProductActionPage = (props) => {
                     status: chkbStatus
                 };
                 if (id) {// update
-                    console.log(input);
                     dispatch(actUpdateProductRequest(product));
                 } else {//add
                     dispatch(actAddProductRequest(product));
