@@ -37,17 +37,16 @@ const ProductActionPage = (props) => {
         return () => {
         };
     }, [itemEditing]);
-
+    var validate = Yup.object({
+        txtName: Yup.string().required('Required'),
+        txtDescription: Yup.string(),
+        txtPrice: Yup.number().required('Required'),
+    });
     return (
         <Formik
             initialValues={input}
             enableReinitialize
-            validationSchema={Yup.object({
-                txtName: Yup.string()
-                    .required('Required'),
-                txtDescription: Yup.string(),
-                txtPrice: Yup.number().required('Required'),
-            })}
+            validationSchema={validate}
             onSubmit={(values) => {
                 var { id, txtName, txtDescription, txtPrice, chkbStatus } = values;
                 setInput({
