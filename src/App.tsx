@@ -1,10 +1,13 @@
-import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import routes from './routes';
 import Menu from './components/Menu/Menu';
-
-const App = (props) => {
-    const showContentMenus = (routes) => {
+interface route {
+    path: string,
+    exact: boolean,
+    main: (...args: any[]) => any
+}
+function App() {
+    const showContentMenus = (routes: route[]) => {
         var result = null;
         if (routes.length > 0) {
             result = routes.map((route, index) => {

@@ -4,14 +4,30 @@ import { Link } from 'react-router-dom';
 import { Formik, Field, ErrorMessage, Form } from 'formik';
 import * as Yup from 'yup';
 import { actAddProductRequest, actGetProductRequest, actUpdateProductRequest } from '../../actions';
-const ProductActionPage = (props) => {
-    var { itemEditing } = useSelector(state => state);
+type RootState = {
+    products: product[],
+    itemEditing: product
+}
+type product = {
+    id: string,
+    name: string,
+    description: string,
+    price: number,
+    status: boolean
+}
+interface Props {
+    location?: any,
+    history?: any,
+    match?: any
+}
+const ProductActionPage: React.FC<Props> = (props) => {
+    var { itemEditing } = useSelector((state: RootState) => state);
     const dispatch = useDispatch();
     const [input, setInput] = useState({
         id: "",
         txtName: "",
         txtDescription: "",
-        txtPrice: "",
+        txtPrice: 0,
         chkbStatus: false
     });
 

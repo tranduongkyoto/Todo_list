@@ -1,11 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
+type product = {
+    id: string,
+    name: string,
+    description: string,
+    price: number,
+    status: boolean
+}
+interface Props {
+    product: product,
+    index: number,
+    onDelete: (...args: any[]) => any
+}
 
+const ProductItem: React.FC<Props> = (props) => {
 
-const ProductItem = (props) => {
-
-    const onDelete = (id) => {
+    const onDelete = (id: string) => {
         if (confirm('Bạn chắc chắn muốn xóa ?')) { //eslint-disable-line
             props.onDelete(id);
         }
@@ -39,9 +49,6 @@ const ProductItem = (props) => {
     );
 
 }
-ProductItem.propTypes = {
-    product: PropTypes.object,
-    index: PropTypes.number,
-};
+
 
 export default ProductItem;

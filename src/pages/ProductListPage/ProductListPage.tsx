@@ -1,24 +1,33 @@
 import React, { useEffect } from 'react';
 import './ProductListPage.css';
 import { useDispatch, useSelector } from 'react-redux';
-import ProductList from './../../components/ProductList/ProductList';
-import ProductItem from './../../components/ProductItem/ProductItem';
+import ProductList from '../../components/ProductList/ProductList';
+import ProductItem from '../../components/ProductItem/ProductItem';
 import { Link } from 'react-router-dom';
-import { actFetchProductsRequest, actDeleteProductRequest } from './../../actions/index';
-import PropTypes from 'prop-types';
-
-const ProductListPage = (props) => {
-    var { products } = useSelector(state => state);
+import { actFetchProductsRequest, actDeleteProductRequest } from '../../actions/index';
+type RootState = {
+    products: product[],
+    itemEditing: product
+}
+type product = {
+    id: string,
+    name: string,
+    description: string,
+    price: number,
+    status: boolean
+}
+const ProductListPage = () => {
+    var { products } = useSelector((state: RootState) => state);
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(actFetchProductsRequest());
     }, []);
 
-    const onDelete = (id) => {
+    const onDelete = (id: string) => {
         dispatch(actDeleteProductRequest(id));
     }
-    const showProducts = (products) => {
+    const showProducts = (products: product[]) => {
         var result = null;
         if (products.length > 0) {
             result = products.map((product, index) => {
@@ -49,10 +58,7 @@ const ProductListPage = (props) => {
         </div>
     );
 }
-ProductListPage.propTypes = {
-    products: PropTypes.object,
 
-};
 
 
 
