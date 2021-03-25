@@ -1,12 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-type product = {
-    id: string,
-    name: string,
-    description: string,
-    price: number,
-    status: boolean
-}
+import type { product } from '../../constants/Types';
+
 interface Props {
     product: product,
     index: number,
@@ -21,10 +16,9 @@ const ProductItem: React.FC<Props> = (props) => {
         }
     }
 
-
-    var { product, index } = props;
-    var statusName = product.status ? 'Còn Hàng' : 'Hết Hàng';
-    var statusClass = product.status ? 'success' : 'default';
+    let { product, index } = props;
+    let statusName = product.status ? 'Còn Hàng' : 'Hết Hàng';
+    let statusClass = product.status ? 'success' : 'default';
     return (
         <tr>
             <td>{index + 1}</td>

@@ -1,12 +1,6 @@
 import * as Types from '../constants/ActionType';
 import callApi from '../utils/apiCaller';
-type product = {
-    id?: string,
-    name: string,
-    description: string,
-    price: number,
-    status: boolean
-}
+import type { product } from '../constants/Types';
 export const actFetchProductsRequest = () => {
     return (dispatch: any) => {
         return callApi('products', 'GET', null).then(res => {

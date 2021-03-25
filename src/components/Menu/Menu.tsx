@@ -31,7 +31,7 @@ const MenuLink = ({ label, to, activeOnlyWhenExact }: { label: string, to: strin
 
 const Menu = () => {
     const showMenus = (menus: typeof Menus) => {
-        var result = null;
+        let result = null;
         if (menus.length > 0) {
             result = menus.map((menu, index) => {
                 return (

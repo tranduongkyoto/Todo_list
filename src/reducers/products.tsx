@@ -1,11 +1,6 @@
 import * as Types from '../constants/ActionType';
-type product = {
-    id: string,
-    name: string,
-    description: string,
-    price: number,
-    status: boolean
-}
+import type {product} from '../constants/Types';
+
 var initialState: product[] = [];
 
 const products = (state: typeof initialState = initialState, action: any) => {

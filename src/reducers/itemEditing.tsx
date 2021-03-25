@@ -1,5 +1,6 @@
 import * as Types from '../constants/ActionType';
-var initialState = [{}];
+import type {product} from '../constants/Types';
+var initialState:product[]=[];
 
 const itemEditing = (state: typeof initialState = initialState, action: any) => {
     switch (action.type) {

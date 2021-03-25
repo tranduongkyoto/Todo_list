@@ -1,25 +1,14 @@
 import React, { useEffect } from 'react';
 import './ProductListPage.css';
-import { useDispatch, useSelector } from 'react-redux';
 import ProductList from '../../components/ProductList/ProductList';
 import ProductItem from '../../components/ProductItem/ProductItem';
 import { Link } from 'react-router-dom';
 import { actFetchProductsRequest, actDeleteProductRequest } from '../../actions/index';
-type RootState = {
-    products: product[],
-    itemEditing: product
-}
-type product = {
-    id: string,
-    name: string,
-    description: string,
-    price: number,
-    status: boolean
-}
+import { useAppSelector, useAppDispatch } from '../../hooks/hook';
+import { product } from '../../constants/Types';
 const ProductListPage = () => {
-    var { products } = useSelector((state: RootState) => state);
-    const dispatch = useDispatch();
-
+    let { products } = useAppSelector(state => state);
+    const dispatch = useAppDispatch();
     useEffect(() => {
         dispatch(actFetchProductsRequest());
     }, []);
