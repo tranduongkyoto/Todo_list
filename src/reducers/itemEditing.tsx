@@ -1,7 +1,7 @@
 import * as Types from '../constants/ActionType';
-import type { product } from '../constants/Types';
+import type { Product } from '../constants/Types';
 
-var initialState: product = {
+var initialState: Product = {
     id: "",
     name: "",
     description: "",
@@ -9,7 +9,7 @@ var initialState: product = {
     status: false
 };
 
-const itemEditing = (state: typeof initialState = initialState, action: any): product => {
+const itemEditing = (state: typeof initialState = initialState, action: any): Product => {
     switch (action.type) {
         case Types.EDIT_PRODUCT:
             return action.product;

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import type { product } from '../../constants/Types';
+import type { Product } from '../../constants/Types';
 interface Props {
-    product: product,
+    product: Product,
     index: number,
     onDelete: (...args: any[]) => any
 }
@@ -32,10 +32,10 @@ const ProductItem: React.FC<Props> = (props) => {
             <td>
                 <Link to={`/product/${product.id}/edit`} className="btn btn-info mr-5">
                     <i className="glyphicon glyphicon-edit"></i> Sửa
-                    </Link>
+                </Link>
                 <button type="button" className="btn btn-danger" onClick={() => onDelete(product.id)}>
                     <i className="glyphicon glyphicon-trash"></i> Xóa
-                    </button>
+                </button>
             </td>
         </tr>
     );

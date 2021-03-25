@@ -1,7 +1,7 @@
 import store from '../index';
 export type RootState = ReturnType<typeof store.getState>
 //export type AppDispatch = typeof store.dispatch
-export type product = {
+export type Product = {
     id: string,
     name: string,
     description: string,
@@ -21,19 +21,19 @@ export type Method =
     | 'link' | 'LINK'
     | 'unlink' | 'UNLINK'
 
-export type ACTION = {
+export type Action = {
     type: 'FETCH_PRODUCTS',
-    products?: product[]
+    products?: Product[]
 } | {
     type: 'ADD_PRODUCT',
-    product?: product
+    product?: Product
 } | {
     type: 'DELETE_PRODUCT',
     id?: string
 } | {
     type: 'EDIT_PRODUCT',
-    product?: product
+    product?: Product
 } | {
     type: 'UPDATE_PRODUCT',
-    product?: product
+    product?: Product
 }

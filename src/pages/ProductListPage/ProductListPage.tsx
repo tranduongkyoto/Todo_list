@@ -5,7 +5,7 @@ import ProductItem from '../../components/ProductItem/ProductItem';
 import { Link } from 'react-router-dom';
 import { actFetchProductsRequest, actDeleteProductRequest } from '../../actions/index';
 import { useAppSelector } from '../../hooks/hook';
-import { product } from '../../constants/Types';
+import { Product } from '../../constants/Types';
 import { useDispatch } from 'react-redux';
 const ProductListPage = () => {
     let { products } = useAppSelector(state => state);
@@ -17,7 +17,7 @@ const ProductListPage = () => {
     const onDelete = (id: string): void => {
         dispatch(actDeleteProductRequest(id));
     }
-    const showProducts = (products: product[]): JSX.Element[] | null => {
+    const showProducts = (products: Product[]): JSX.Element[] | null => {
         let result = null;
         if (products.length > 0) {
             result = products.map((product, index) => {
