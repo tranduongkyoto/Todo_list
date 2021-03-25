@@ -23,7 +23,7 @@ const products = (state: typeof initialState = initialState, action: any): produ
     }
 };
 
-const findIndex = (products: product[], id: string) => {
+const findIndex = (products: product[], id: string): number => {
     var result = -1;
     products.forEach((product, index) => {
         if (product.id === id) {

@@ -30,7 +30,7 @@ const MenuLink = ({ label, to, activeOnlyWhenExact }: { label: string, to: strin
 }
 
 const Menu = () => {
-    const showMenus = (menus: typeof Menus) => {
+    const showMenus = (menus: typeof Menus): JSX.Element[] | null => {
         let result = null;
         if (menus.length > 0) {
             result = menus.map((menu, index) => {
