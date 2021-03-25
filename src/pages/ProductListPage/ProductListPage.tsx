@@ -4,20 +4,21 @@ import ProductList from '../../components/ProductList/ProductList';
 import ProductItem from '../../components/ProductItem/ProductItem';
 import { Link } from 'react-router-dom';
 import { actFetchProductsRequest, actDeleteProductRequest } from '../../actions/index';
-import { useAppSelector, useAppDispatch } from '../../hooks/hook';
+import { useAppSelector } from '../../hooks/hook';
 import { product } from '../../constants/Types';
+import { useDispatch } from 'react-redux';
 const ProductListPage = () => {
     let { products } = useAppSelector(state => state);
-    const dispatch = useAppDispatch();
+    const dispatch = useDispatch();
     useEffect(() => {
         dispatch(actFetchProductsRequest());
     }, []);
 
-    const onDelete = (id: string) => {
+    const onDelete = (id: string): void => {
         dispatch(actDeleteProductRequest(id));
     }
-    const showProducts = (products: product[]) => {
-        var result = null;
+    const showProducts = (products: product[]): JSX.Element[] | null => {
+        let result = null;
         if (products.length > 0) {
             result = products.map((product, index) => {
                 return (

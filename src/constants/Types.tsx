@@ -1,6 +1,6 @@
-import store from '../index'
+import store from '../index';
 export type RootState = ReturnType<typeof store.getState>
-export type AppDispatch = typeof store.dispatch
+//export type AppDispatch = typeof store.dispatch
 export type product = {
     id: string,
     name: string,
@@ -8,6 +8,7 @@ export type product = {
     price: number,
     status: boolean
 }
+
 export type Method =
     | 'get' | 'GET'
     | 'delete' | 'DELETE'
@@ -19,3 +20,20 @@ export type Method =
     | 'purge' | 'PURGE'
     | 'link' | 'LINK'
     | 'unlink' | 'UNLINK'
+
+export type ACTION = {
+    type: 'FETCH_PRODUCTS',
+    products?: product[]
+} | {
+    type: 'ADD_PRODUCT',
+    product?: product
+} | {
+    type: 'DELETE_PRODUCT',
+    id?: string
+} | {
+    type: 'EDIT_PRODUCT',
+    product?: product
+} | {
+    type: 'UPDATE_PRODUCT',
+    product?: product
+}

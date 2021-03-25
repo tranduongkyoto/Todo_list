@@ -1,9 +1,8 @@
 import * as Types from '../constants/ActionType';
-import type {product} from '../constants/Types';
-
+import type { product } from '../constants/Types';
 var initialState: product[] = [];
 
-const products = (state: typeof initialState = initialState, action: any) => {
+const products = (state: typeof initialState = initialState, action: any): product[] => {
     var { product, id } = action;
     var index = -1;
     switch (action.type) {
@@ -24,7 +23,7 @@ const products = (state: typeof initialState = initialState, action: any) => {
     }
 };
 
-var findIndex = (products: product[], id: string) => {
+const findIndex = (products: product[], id: string) => {
     var result = -1;
     products.forEach((product, index) => {
         if (product.id === id) {

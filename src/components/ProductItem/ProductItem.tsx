@@ -1,16 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import type { product } from '../../constants/Types';
-
 interface Props {
     product: product,
     index: number,
     onDelete: (...args: any[]) => any
 }
-
 const ProductItem: React.FC<Props> = (props) => {
 
-    const onDelete = (id: string) => {
+    const onDelete = (id: string): void => {
         if (confirm('Bạn chắc chắn muốn xóa ?')) { //eslint-disable-line
             props.onDelete(id);
         }

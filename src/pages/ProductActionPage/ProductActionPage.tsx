@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { Formik, Field, ErrorMessage, Form } from 'formik';
 import * as Yup from 'yup';
 import { actAddProductRequest, actGetProductRequest, actUpdateProductRequest } from '../../actions';
-import { useAppSelector, useAppDispatch } from '../../hooks/hook';
+import { useAppSelector} from '../../hooks/hook';
+import { useDispatch } from 'react-redux';
 interface Props {
     location?: any,
     history?: any,
@@ -11,7 +12,7 @@ interface Props {
 }
 const ProductActionPage: React.FC<Props> = (props) => {
     let { itemEditing } = useAppSelector(state => state);
-    const dispatch = useAppDispatch();
+    const dispatch = useDispatch();
     const [input, setInput] = useState({
         id: "",
         txtName: "",

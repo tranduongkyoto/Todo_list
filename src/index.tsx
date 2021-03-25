@@ -9,7 +9,6 @@ const store = createStore(
     appReducers,
     compose(
         applyMiddleware(thunk),
-
     )
 );
 

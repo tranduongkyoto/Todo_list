@@ -1,13 +1,13 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import routes from './routes';
 import Menu from './components/Menu/Menu';
-interface route {
+type route = {
     path: string,
     exact: boolean,
     main: (...args: any[]) => any
 }
 function App() {
-    const showContentMenus = (routes: route[]) => {
+    const showContentMenus = (routes: route[]): JSX.Element[] | null => {
         let result = null;
         if (routes.length > 0) {
             result = routes.map((route, index) => {
@@ -21,13 +21,13 @@ function App() {
                 );
             });
         }
-        return <Switch>{result}</Switch>;
+        return result;
     }
     return (
         <Router>
             <div className="App">
                 <Menu />
-                {showContentMenus(routes)}
+                <Switch>{showContentMenus(routes)}</Switch>
             </div>
         </Router>
     );

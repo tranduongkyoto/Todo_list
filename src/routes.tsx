@@ -4,7 +4,7 @@ import NotFound from './pages/NotFound/NotFound';
 import ProductActionPage from './pages/ProductActionPage/ProductActionPage';
 import ProductListPage from './pages/ProductListPage/ProductListPage';
 
-const routes = [
+let routes = [
     {
         path: '/',
         exact: true,

@@ -14,7 +14,7 @@ var Menus = [
     }
 ]
 
-const MenuLink = ({ label, to, activeOnlyWhenExact }: { label: string, to: string, activeOnlyWhenExact: boolean }) => {
+const MenuLink = ({ label, to, activeOnlyWhenExact }: { label: string, to: string, activeOnlyWhenExact: boolean }): JSX.Element => {
     return (
         <Route path={to} exact={activeOnlyWhenExact} children={({ match }) => {
             var active = match ? 'active' : '';

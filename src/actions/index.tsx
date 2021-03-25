@@ -1,7 +1,9 @@
 import * as Types from '../constants/ActionType';
 import callApi from '../utils/apiCaller';
 import type { product } from '../constants/Types';
-export const actFetchProductsRequest = () => {
+import type { ACTION } from '../constants/Types';
+
+export const actFetchProductsRequest = (): (...args: any[]) => Promise<void> => {
     return (dispatch: any) => {
         return callApi('products', 'GET', null).then(res => {
             if (res) {
@@ -11,14 +13,14 @@ export const actFetchProductsRequest = () => {
     }
 }
 
-export const actFetchProducts = (products: product[]) => {
+export const actFetchProducts = (products: product[]): ACTION => {
     return {
         type: Types.FETCH_PRODUCTS,
         products
     }
 }
 
-export const actAddProductRequest = (product: product) => {
+export const actAddProductRequest = (product: product): (...args: any[]) => Promise<void> => {
     return (dispatch: any) => {
         return callApi('products', 'POST', product).then(res => {
             if (res) {
@@ -28,7 +30,7 @@ export const actAddProductRequest = (product: product) => {
     }
 }
 
-export const actAddProduct = (product: product) => {
+export const actAddProduct = (product: product): ACTION => {
     return {
         type: Types.ADD_PRODUCT,
         product
@@ -36,7 +38,7 @@ export const actAddProduct = (product: product) => {
 }
 
 
-export const actDeleteProductRequest = (id: string) => {
+export const actDeleteProductRequest = (id: string): (...args: any[]) => Promise<void> => {
     return (dispatch: any) => {
         return callApi(`products/${id}`, 'DELETE', null).then(res => {
             dispatch(actDeleteProduct(id));
@@ -44,14 +46,14 @@ export const actDeleteProductRequest = (id: string) => {
     }
 }
 
-export const actDeleteProduct = (id: string) => {
+export const actDeleteProduct = (id: string): ACTION => {
     return {
         type: Types.DELETE_PRODUCT,
         id
     }
 }
 
-export const actGetProductRequest = (id: string) => {
+export const actGetProductRequest = (id: string): (...args: any[]) => Promise<void> => {
     return (dispatch: any) => {
         return callApi(`products/${id}`, 'GET', null).then(res => {
             if (res) {
@@ -61,14 +63,14 @@ export const actGetProductRequest = (id: string) => {
     }
 }
 
-export const actGetProduct = (product: product) => {
+export const actGetProduct = (product: product): ACTION => {
     return {
         type: Types.EDIT_PRODUCT,
         product
     }
 }
 
-export const actUpdateProductRequest = (product: product) => {
+export const actUpdateProductRequest = (product: product): (...args: any[]) => Promise<void> => {
     return (dispatch: any) => {
         return callApi(`products/${product.id}`, 'PUT', product).then(res => {
             if (res) {
@@ -78,7 +80,7 @@ export const actUpdateProductRequest = (product: product) => {
     }
 }
 
-export const actUpdateProduct = (product: product) => {
+export const actUpdateProduct = (product: product): ACTION => {
     return {
         type: Types.UPDATE_PRODUCT,
         product
