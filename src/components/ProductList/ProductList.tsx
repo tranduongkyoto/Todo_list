@@ -1,6 +1,8 @@
 import React from 'react';
+interface Props {
 
-const ProductList = (props) => {
+}
+const ProductList: React.FC<Props> = (props) => {
     return (
         <div className="panel panel-success">
             <div className="panel-heading">

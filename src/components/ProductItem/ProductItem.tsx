@@ -1,20 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import type { Product } from '../../constants/Types';
+interface Props {
+    product: Product,
+    index: number,
+    onDelete: (...args: any[]) => any
+}
+const ProductItem: React.FC<Props> = (props) => {
 
-
-const ProductItem = (props) => {
-
-    const onDelete = (id) => {
+    const onDelete = (id: string): void => {
         if (confirm('Bạn chắc chắn muốn xóa ?')) { //eslint-disable-line
             props.onDelete(id);
         }
     }
 
-
-    var { product, index } = props;
-    var statusName = product.status ? 'Còn Hàng' : 'Hết Hàng';
-    var statusClass = product.status ? 'success' : 'default';
+    let { product, index } = props;
+    let statusName = product.status ? 'Còn Hàng' : 'Hết Hàng';
+    let statusClass = product.status ? 'success' : 'default';
     return (
         <tr>
             <td>{index + 1}</td>
@@ -30,18 +32,15 @@ const ProductItem = (props) => {
             <td>
                 <Link to={`/product/${product.id}/edit`} className="btn btn-info mr-5">
                     <i className="glyphicon glyphicon-edit"></i> Sửa
-                    </Link>
+                </Link>
                 <button type="button" className="btn btn-danger" onClick={() => onDelete(product.id)}>
                     <i className="glyphicon glyphicon-trash"></i> Xóa
-                    </button>
+                </button>
             </td>
         </tr>
     );
 
 }
-ProductItem.propTypes = {
-    product: PropTypes.object,
-    index: PropTypes.number,
-};
+
 
 export default ProductItem;

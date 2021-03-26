@@ -1,11 +1,14 @@
-import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import routes from './routes';
 import Menu from './components/Menu/Menu';
-
-const App = (props) => {
-    const showContentMenus = (routes) => {
-        var result = null;
+type RouteType = {
+    path: string,
+    exact: boolean,
+    main: (...args: any[]) => any
+}
+function App() {
+    const showContentMenus = (routes: RouteType[]): JSX.Element[] | null => {
+        let result = null;
         if (routes.length > 0) {
             result = routes.map((route, index) => {
                 return (
@@ -18,13 +21,13 @@ const App = (props) => {
                 );
             });
         }
-        return <Switch>{result}</Switch>;
+        return result;
     }
     return (
         <Router>
             <div className="App">
                 <Menu />
-                {showContentMenus(routes)}
+                <Switch>{showContentMenus(routes)}</Switch>
             </div>
         </Router>
     );

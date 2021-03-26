@@ -1,25 +1,24 @@
 import React, { useEffect } from 'react';
 import './ProductListPage.css';
-import { useDispatch, useSelector } from 'react-redux';
-import ProductList from './../../components/ProductList/ProductList';
-import ProductItem from './../../components/ProductItem/ProductItem';
+import ProductList from '../../components/ProductList/ProductList';
+import ProductItem from '../../components/ProductItem/ProductItem';
 import { Link } from 'react-router-dom';
-import { actFetchProductsRequest, actDeleteProductRequest } from './../../actions/index';
-import PropTypes from 'prop-types';
-
-const ProductListPage = (props) => {
-    var { products } = useSelector(state => state);
+import { actFetchProductsRequest, actDeleteProductRequest } from '../../actions/index';
+import { useAppSelector } from '../../hooks/hook';
+import { Product } from '../../constants/Types';
+import { useDispatch } from 'react-redux';
+const ProductListPage = () => {
+    let { products } = useAppSelector(state => state);
     const dispatch = useDispatch();
-
     useEffect(() => {
         dispatch(actFetchProductsRequest());
     }, []);
 
-    const onDelete = (id) => {
+    const onDelete = (id: string): void => {
         dispatch(actDeleteProductRequest(id));
     }
-    const showProducts = (products) => {
-        var result = null;
+    const showProducts = (products: Product[]): JSX.Element[] | null => {
+        let result = null;
         if (products.length > 0) {
             result = products.map((product, index) => {
                 return (
@@ -49,10 +48,7 @@ const ProductListPage = (props) => {
         </div>
     );
 }
-ProductListPage.propTypes = {
-    products: PropTypes.object,
 
-};
 
 
 

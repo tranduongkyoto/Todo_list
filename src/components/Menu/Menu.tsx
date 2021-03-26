@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, Route } from 'react-router-dom';
 
-const menus = [
+var Menus = [
     {
         name: 'Trang Chủ',
         to: '/',
@@ -14,7 +14,7 @@ const menus = [
     }
 ]
 
-const MenuLink = ({ label, to, activeOnlyWhenExact }) => {
+const MenuLink = ({ label, to, activeOnlyWhenExact }: { label: string, to: string, activeOnlyWhenExact: boolean }): JSX.Element => {
     return (
         <Route path={to} exact={activeOnlyWhenExact} children={({ match }) => {
             var active = match ? 'active' : '';
@@ -30,8 +30,8 @@ const MenuLink = ({ label, to, activeOnlyWhenExact }) => {
 }
 
 const Menu = () => {
-    const showMenus = (menus) => {
-        var result = null;
+    const showMenus = (menus: typeof Menus): JSX.Element[] | null => {
+        let result = null;
         if (menus.length > 0) {
             result = menus.map((menu, index) => {
                 return (
@@ -49,7 +49,7 @@ const Menu = () => {
     return (
         <nav className="navbar navbar-default">
             <ul className="nav navbar-nav">
-                {showMenus(menus)}
+                {showMenus(Menus)}
             </ul>
         </nav>
     );

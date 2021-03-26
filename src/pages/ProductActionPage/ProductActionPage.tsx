@@ -1,22 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Formik, Field, ErrorMessage, Form } from 'formik';
 import * as Yup from 'yup';
 import { actAddProductRequest, actGetProductRequest, actUpdateProductRequest } from '../../actions';
-const ProductActionPage = (props) => {
-    var { itemEditing } = useSelector(state => state);
+import { useAppSelector} from '../../hooks/hook';
+import { useDispatch } from 'react-redux';
+interface Props {
+    location?: any,
+    history?: any,
+    match?: any
+}
+const ProductActionPage: React.FC<Props> = (props) => {
+    let { itemEditing } = useAppSelector(state => state);
     const dispatch = useDispatch();
     const [input, setInput] = useState({
         id: "",
         txtName: "",
         txtDescription: "",
-        txtPrice: "",
+        txtPrice: 0,
         chkbStatus: false
     });
 
     useEffect(() => {
-        var { match } = props;
+        let { match } = props;
         //console.log(match);
         if (match) { // update
             var id = match.params.id;
@@ -113,7 +119,6 @@ const ProductActionPage = (props) => {
                 </div>
             </Form>
         </Formik>
-
     );
 }
 
