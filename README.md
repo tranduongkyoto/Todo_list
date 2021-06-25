@@ -8,9 +8,12 @@ Run application seperately
 
 
 $ cd Todo_list
+
 $ npm install 
+
 $ npm start
 
 
 Test it
+
 When everything is done, go to http://localhost:3000 in browser to see website.
