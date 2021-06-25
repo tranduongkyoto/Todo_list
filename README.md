@@ -6,9 +6,11 @@ This project can manage your’s Todo List: can add, edit, delete, search a task
 
 Run application seperately
 
+
 $ cd Todo_list
 $ npm install 
 $ npm start
+
 
 Test it
 When everything is done, go to http://localhost:3000 in browser to see website.
