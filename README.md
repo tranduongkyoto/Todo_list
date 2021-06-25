@@ -6,7 +6,7 @@ Tech stack: React, Redux, React-Router, Axios, TypeScript, Bootstrap
  
 This project can manage your’s Todo List: can add, edit, delete, search a task.
 
-### Run application seperately 
+### Run application 
 
 ```sh
 $ cd Todo_list
