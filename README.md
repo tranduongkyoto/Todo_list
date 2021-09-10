@@ -9,7 +9,7 @@ This project can manage your’s Todo List: can add, edit, delete, search a task
 ### Run application 
 
 ```sh
-$ git clone 
+$ git clone ...
 $ cd Todo_list
 $ npm install 
 $ npm start
